@@ -34,7 +34,7 @@
         "dsantang/domain-events": "^0.1.0"
     },
     "suggest": {
-        "symfony/event-dispatcher" : "To be able to use DoctrineEventsDispatcher, which depends on Symfony's EventDispatcherInterface"
+        "symfony/event-dispatcher" : "To be able to dispatch domain events via a Symfony's EventDispatcherInterface."
     },
     "require-dev": {
         "doctrine/coding-standard": "^5.0",
