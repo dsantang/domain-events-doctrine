@@ -1,0 +1,48 @@
+{
+    "name": "dsantang/domain-events-doctrine",
+    "description": "Package that provides an integration with Doctrine ORM to automatically dispatch Domain Events.",
+    "type": "library",
+    "keywords": [
+        "domain event",
+        "domain driven design",
+        "dispatcher",
+        "orm",
+        "doctrine"
+    ],
+    "authors": [
+        {
+            "name": "Davide Santangelo"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Dsantang\\DomainEventsDoctrine\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Dsantang\\DomainEventsDoctrine\\Tests\\": "tests"
+        }
+    },
+    "require": {
+        "php": "^7.2",
+        "doctrine/orm": "^2.6",
+        "dsantang/domain-events": "^0.1.0"
+    },
+    "suggest": {
+        "symfony/event-dispatcher" : "To be able to use DoctrineEventsDispatcher, which depends on Symfony's EventDispatcherInterface"
+    },
+    "require-dev": {
+        "doctrine/coding-standard": "^5.0",
+        "infection/infection": "^0.10.6",
+        "phpstan/phpstan": "^0.10.5",
+        "phpstan/phpstan-strict-rules": "^0.10.1",
+        "phpunit/phpunit": "^7.4",
+        "squizlabs/php_codesniffer": "^3.3",
+        "symfony/event-dispatcher": "^4.1"
+    }
+}
