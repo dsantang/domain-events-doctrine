@@ -4,3 +4,4 @@
 /phpstan.neon.dist export-ignore
 /phpunit.xml.dist export-ignore
 /.circleci export-ignore
+/.scrutinizer.yml export-ignore
