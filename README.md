@@ -3,7 +3,7 @@
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/dsantang/domain-events-doctrine/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/dsantang/domain-events-doctrine/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/dsantang/domain-events-doctrine/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/dsantang/domain-events-doctrine/?branch=master)
 [![Build Status](https://scrutinizer-ci.com/g/dsantang/domain-events-doctrine/badges/build.png?b=master)](https://scrutinizer-ci.com/g/dsantang/domain-events-doctrine/build-status/master)
-[![SymfonyInsight](https://insight.symfony.com/projects/d2302e70-4903-4ec7-aedd-3ea8bc71d217/small.svg)](https://insight.symfony.com/projects/d2302e70-4903-4ec7-aedd-3ea8bc71d217)
+[![SymfonyInsight](https://insight.symfony.com/projects/1ad0edc3-0f98-47af-89e3-434628e1fc7a/small.svg)](https://insight.symfony.com/projects/1ad0edc3-0f98-47af-89e3-434628e1fc7a)
 
 
 This package is meant to be used in conjunction with [dsantang/domain-events](https://github.com/dsantang/domain-events),  
