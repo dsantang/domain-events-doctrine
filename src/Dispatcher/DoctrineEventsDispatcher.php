@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Dsantang\DomainEventsDoctrine\Dispatcher;
 
-use Doctrine\ORM\Event\PostFlushEventArgs;
 use Dsantang\DomainEventsDoctrine\Releaser;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -22,7 +21,7 @@ final class DoctrineEventsDispatcher
         $this->dispatcher = $dispatcher;
     }
 
-    public function postFlush(PostFlushEventArgs $args) : void
+    public function postFlush() : void
     {
         $events = $this->releaser->release();
 

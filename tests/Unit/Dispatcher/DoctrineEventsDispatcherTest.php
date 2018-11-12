@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Dsantang\DomainEventsDoctrine\Tests\Unit\Dispatcher;
 
-use Doctrine\ORM\Event\PostFlushEventArgs;
 use Dsantang\DomainEvents\DomainEvent;
 use Dsantang\DomainEventsDoctrine\Dispatcher\DoctrineEventsDispatcher;
 use Dsantang\DomainEventsDoctrine\Dispatcher\SymfonyEvent;
@@ -43,9 +42,6 @@ final class DoctrineEventsDispatcherTest extends TestCase
 
         $eventDispatcher = new DoctrineEventsDispatcher($releaser, $dispatcher);
 
-        $args = $this->createMock(PostFlushEventArgs::class);
-        assert($args instanceof PostFlushEventArgs);
-
-        $eventDispatcher->postFlush($args);
+        $eventDispatcher->postFlush();
     }
 }

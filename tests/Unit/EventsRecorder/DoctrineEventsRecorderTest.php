@@ -20,7 +20,7 @@ use function assert;
 final class DoctrineEventsRecorderTest extends TestCase
 {
     /**
-     * @param mixed[] $domainEvents
+     * @param DomainEvent[] $domainEvents
      *
      * @dataProvider provideEventAwareChangedEntities
      *
