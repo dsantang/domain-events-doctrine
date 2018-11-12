@@ -45,9 +45,9 @@ final class DoctrineEventsRecorder
     {
         $entities = [];
 
-        $entities[] = $unitOfWork->getScheduledEntityDeletions();
         $entities[] = $unitOfWork->getScheduledEntityInsertions();
         $entities[] = $unitOfWork->getScheduledEntityUpdates();
+        $entities[] = $unitOfWork->getScheduledEntityDeletions();
 
         return array_filter($entities, static function ($entity) {
             return $entity instanceof EventAware;
