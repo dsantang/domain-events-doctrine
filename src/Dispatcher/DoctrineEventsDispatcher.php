@@ -16,9 +16,10 @@ final class DoctrineEventsDispatcher
     /** @var EventDispatcherInterface */
     private $dispatcher;
 
-    public function __construct(Releaser $releaser)
+    public function __construct(Releaser $releaser, EventDispatcherInterface $dispatcher)
     {
-        $this->releaser = $releaser;
+        $this->releaser   = $releaser;
+        $this->dispatcher = $dispatcher;
     }
 
     public function postFlush(PostFlushEventArgs $args) : void
