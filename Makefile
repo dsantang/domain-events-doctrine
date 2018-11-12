@@ -1,7 +1,7 @@
 # set all to phony tail
 .PHONY: *
 
-all: install cs-fix cs-check test ## Runs everything
+all: install cs-fix cs-check static-analysis test ## Runs everything
 
 test: test-unit test-mutation ## Runs all test suite
 
@@ -18,7 +18,7 @@ cs-check: ## Runs phpcs
 	vendor/bin/phpcs
 
 static-analysis: ## Runs static analysis with phpstan
-	vendor/bin/phpstan analyse -a tests/container.php
+	vendor/bin/phpstan analyse
 
 install-ci: ## Install dependencies with composer with flags -a -n
 	composer install $(CI_COMPOSER_FLAGS)
