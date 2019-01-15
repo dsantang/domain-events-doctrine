@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Dsantang\DomainEventsDoctrine\Tests\Unit\Dispatcher;
 
 use Dsantang\DomainEvents\DomainEvent;
-use Dsantang\DomainEventsDoctrine\Dispatcher\DoctrineEventsDispatcher;
+use Dsantang\DomainEventsDoctrine\Dispatcher\SimpleEventsDispatcher;
 use Dsantang\DomainEventsDoctrine\Dispatcher\SymfonyEvent;
 use Dsantang\DomainEventsDoctrine\Releaser;
 use PHPUnit\Framework\TestCase;
@@ -40,7 +40,7 @@ final class DoctrineEventsDispatcherTest extends TestCase
                    ->method('dispatch')
                    ->with(self::EVENT_NAME, self::isInstanceOf(SymfonyEvent::class));
 
-        $eventDispatcher = new DoctrineEventsDispatcher($releaser, $dispatcher);
+        $eventDispatcher = new SimpleEventsDispatcher($releaser, $dispatcher);
 
         $eventDispatcher->postFlush();
     }

@@ -31,7 +31,7 @@
     "require": {
         "php": "^7.2",
         "doctrine/orm": "^2.6",
-        "dsantang/domain-events": "^0.1.0"
+        "dsantang/domain-events": "^0.2"
     },
     "suggest": {
         "symfony/event-dispatcher" : "To be able to dispatch domain events via a Symfony's EventDispatcherInterface."
