@@ -21,4 +21,9 @@ final class SymfonyEvent extends Event implements DomainEvent
     {
         return $this->event->getName();
     }
+
+    public function getEvent() : DomainEvent
+    {
+        return $this->event;
+    }
 }

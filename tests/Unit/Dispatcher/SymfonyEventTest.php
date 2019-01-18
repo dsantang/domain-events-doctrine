@@ -19,4 +19,15 @@ final class SymfonyEventTest extends TestCase
 
         self::assertSame(RandomDomainEvent::EVENT_NAME, $event->getName());
     }
+
+    /**
+     * @test
+     */
+    public function getEventReturnsCorrectName() : void
+    {
+        $internalEvent = new RandomDomainEvent();
+        $event         = new SymfonyEvent($internalEvent);
+
+        self::assertSame($internalEvent, $event->getEvent());
+    }
 }
