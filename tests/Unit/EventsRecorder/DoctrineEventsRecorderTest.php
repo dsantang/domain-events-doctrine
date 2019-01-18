@@ -32,15 +32,15 @@ final class DoctrineEventsRecorderTest extends TestCase
 
         $unitOfWork->expects(self::once())
                    ->method('getScheduledEntityDeletions')
-                   ->willReturn(new Object_());
+                   ->willReturn([new Object_()]);
 
         $unitOfWork->expects(self::once())
                    ->method('getScheduledEntityInsertions')
-                   ->willReturn(new Object_());
+                   ->willReturn([new Object_()]);
 
         $unitOfWork->expects(self::once())
                    ->method('getScheduledEntityUpdates')
-                   ->willReturn($eventAwareEntity);
+                   ->willReturn([$eventAwareEntity]);
 
         $entityManager = $this->createMock(EntityManagerInterface::class);
         $entityManager->expects(self::once())
