@@ -7,16 +7,17 @@ namespace Dsantang\DomainEventsDoctrine\Tests\Unit\EventsRecorder;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\UnitOfWork;
+use Dsantang\DomainEvents\Counter;
 use Dsantang\DomainEvents\DomainEvent;
 use Dsantang\DomainEvents\EventAware;
 use Dsantang\DomainEvents\Registry\EventsRegistry;
 use Dsantang\DomainEventsDoctrine\Aggregator;
-use Dsantang\DomainEventsDoctrine\EventsRecorder\DoctrineEventsRecorder;
+use Dsantang\DomainEventsDoctrine\EventsRecorder\OrderedDoctrineEventsRecorder;
 use Dsantang\DomainEventsDoctrine\Tests\RandomDomainEvent;
 use phpDocumentor\Reflection\Types\Object_;
 use PHPUnit\Framework\TestCase;
 
-final class DoctrineEventsRecorderTest extends TestCase
+final class OrderedDoctrineEventsRecorderTest extends TestCase
 {
     /**
      * @param DomainEvent[] $domainEvents
@@ -35,7 +36,7 @@ final class DoctrineEventsRecorderTest extends TestCase
 
         $unitOfWork->expects(self::once())
                    ->method('getScheduledEntityInsertions')
-                   ->willReturn([new Object_()]);
+                   ->willReturn([$eventAwareEntity]);
 
         $unitOfWork->expects(self::once())
                    ->method('getScheduledEntityUpdates')
@@ -52,14 +53,18 @@ final class DoctrineEventsRecorderTest extends TestCase
                    ->method('aggregate')
                    ->with(...$domainEvents);
 
-        $eventRecorder = new DoctrineEventsRecorder($aggregator);
+        $eventRecorder = new OrderedDoctrineEventsRecorder($aggregator);
 
         $eventArgs = $this->createMock(OnFlushEventArgs::class);
         $eventArgs->expects(self::once())
                   ->method('getEntityManager')
                   ->willReturn($entityManager);
 
+        Counter::getNext();
+
         $eventRecorder->onFlush($eventArgs);
+
+        self::assertEquals(0, Counter::getNext());
     }
 
     /**
@@ -72,13 +77,13 @@ final class DoctrineEventsRecorderTest extends TestCase
 
             public function __construct(DomainEvent $domainEvent)
             {
-                $this->recordedEvents = [$domainEvent];
+                $this->recordedEvents = [1 => $domainEvent, 0 => $domainEvent];
             }
         };
 
         return [
             'with no changed entities' => [new Object_(), []],
-            'with a changed entity' => [$awareEntity, [new RandomDomainEvent()]],
+            'with a changed entity' => [$awareEntity, [new RandomDomainEvent(), new RandomDomainEvent()]],
         ];
     }
 }

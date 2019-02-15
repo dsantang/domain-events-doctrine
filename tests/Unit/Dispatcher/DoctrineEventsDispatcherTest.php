@@ -10,7 +10,6 @@ use Dsantang\DomainEventsDoctrine\Dispatcher\SymfonyEvent;
 use Dsantang\DomainEventsDoctrine\Releaser;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
-use function assert;
 
 final class DoctrineEventsDispatcherTest extends TestCase
 {
@@ -27,14 +26,12 @@ final class DoctrineEventsDispatcherTest extends TestCase
                     ->willReturn(self::EVENT_NAME);
 
         $releaser = $this->createMock(Releaser::class);
-        assert($releaser instanceof Releaser);
 
         $releaser->expects(self::once())
                  ->method('release')
                  ->willReturn([$domainEvent]);
 
         $dispatcher = $this->createMock(EventDispatcherInterface::class);
-        assert($dispatcher instanceof EventDispatcherInterface);
 
         $dispatcher->expects(self::once())
                    ->method('dispatch')
