@@ -31,7 +31,7 @@
     "require": {
         "php": "^7.2",
         "doctrine/orm": "^2.6",
-        "dsantang/domain-events": "^0.2"
+        "dsantang/domain-events": "^0.3"
     },
     "suggest": {
         "symfony/event-dispatcher" : "To be able to dispatch domain events via a Symfony's EventDispatcherInterface."
@@ -39,8 +39,9 @@
     "require-dev": {
         "doctrine/coding-standard": "^5.0",
         "infection/infection": "^0.10.6",
-        "phpstan/phpstan": "^0.10.5",
-        "phpstan/phpstan-strict-rules": "^0.10.1",
+        "phpstan/phpstan": "^0.11",
+        "phpstan/phpstan-phpunit": "^0.11",
+        "phpstan/phpstan-strict-rules": "^0.11",
         "phpunit/phpunit": "^7.4",
         "squizlabs/php_codesniffer": "^3.3",
         "symfony/event-dispatcher": "^4.1"

@@ -7,7 +7,6 @@ namespace Dsantang\DomainEventsDoctrine\Tests\Unit;
 use Dsantang\DomainEvents\DomainEvent;
 use Dsantang\DomainEventsDoctrine\EventsTracker;
 use PHPUnit\Framework\TestCase;
-use function assert;
 
 final class EventsTrackerTest extends TestCase
 {
@@ -23,10 +22,7 @@ final class EventsTrackerTest extends TestCase
     public function setUpDependencies() : void
     {
         $event1 = $this->createMock(DomainEvent::class);
-        assert($event1 instanceof DomainEvent);
-
         $event2 = $this->createMock(DomainEvent::class);
-        assert($event2 instanceof DomainEvent);
 
         $this->events = [$event1, $event2];
 

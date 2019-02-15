@@ -15,7 +15,6 @@ use Dsantang\DomainEventsDoctrine\EventsRecorder\DoctrineEventsRecorder;
 use Dsantang\DomainEventsDoctrine\Tests\RandomDomainEvent;
 use phpDocumentor\Reflection\Types\Object_;
 use PHPUnit\Framework\TestCase;
-use function assert;
 
 final class DoctrineEventsRecorderTest extends TestCase
 {
@@ -48,7 +47,6 @@ final class DoctrineEventsRecorderTest extends TestCase
                       ->willReturn($unitOfWork);
 
         $aggregator = $this->createMock(Aggregator::class);
-        assert($aggregator instanceof Aggregator);
 
         $aggregator->expects(self::once())
                    ->method('aggregate')
@@ -60,8 +58,6 @@ final class DoctrineEventsRecorderTest extends TestCase
         $eventArgs->expects(self::once())
                   ->method('getEntityManager')
                   ->willReturn($entityManager);
-
-        assert($eventArgs instanceof OnFlushEventArgs);
 
         $eventRecorder->onFlush($eventArgs);
     }
