@@ -53,3 +53,128 @@ $evm->addEventListener([Events::postFlush], new DoctrineEventsDispatcher($tracke
 That's it! You're all set!
 Now you can add as many Symfony's listeners as you need to your `$dispatcher`,  
 and you'll be able to react to the domain events raised by your application.
+
+## Outbox pattern
+
+This library also provides support for the [Outbox pattern](https://microservices.io/patterns/data/application-events.html) implementation.  
+The idea behind the implementation is to be able to add entities to an "ongoing" transaction by hooking into Doctrine's `onFlush` event, 
+creating "outbox" entries based on the application's domain events, and safely store them using the same DB transaction.  
+
+In order to enrich your Domain Event and be able to set all the data required by the Outbox entity, 
+you need to create a `Converter` class (by implementing `Dsantang\DomainEventsDoctrine\Outbox\Converter` interface) 
+An example of an outbox event is as follows:
+
+```php
+use Dsantang\DomainEvents\DomainEvent;
+use Dsantang\DomainEventsDoctrine\Outbox\Converter;
+use Dsantang\DomainEventsDoctrine\Outbox\OutboxEntry;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
+
+final class YourOutboxConverter implements Converter
+{
+    public function convert(DomainEvent $domainEvent) : OutboxEntry
+    {
+        return new YourOutboxEntry($domainEvent);
+    }
+}
+
+final class YourOutboxEntry implements OutboxEntry
+{
+    /** @var DomainEvent */
+    private $domainEvent;
+
+    public function __construct(DomainEvent $domainEvent)
+    {
+        $this->domainEvent = $domainEvent;
+    }
+    
+    public function getName() : string
+    {
+        return 'OrderDispatched';
+    }
+
+    public function getAggregateId() : UuidInterface
+    {
+        return Uuid::fromString('d1702762-548b-11e9-8647-d663bd873d93');
+    }
+
+    public function getAggregateType() : string
+    {
+        return 'Order';
+    }
+
+    public function getPayloadType() : string
+    {
+        return 'OrderStructure';
+    }
+
+    public function getMessageKey() : string
+    {
+        return 'd663bd873d93';
+    }
+
+    public function getMessageRoute() : string
+    {
+        return 'aggregate.order';
+    }
+
+    public function getMessageType() : string
+    {
+        return 'OrderCreated';
+    }
+
+    public function getPayload() : string
+    {
+        return json_encode($this->domainEvent)
+    }
+
+    public function getSchemaVersion() : int
+    {
+        return 1;
+    }
+}    
+```
+In order to persist your Outbox entries, you must create a Doctrine Entity class inside your application that extends 
+`Dsantang\DomainEventsDoctrine\Outbox\OutboxMappedSuperclass`.  
+Please note that this approach uses [Doctrine's Inheritance Mapping](https://www.doctrine-project.org/projects/doctrine-orm/en/2.6/reference/inheritance-mapping.html#mapped-superclasses):  
+
+Here is an example of an Outbox Entity class:   
+```php
+namespace YourNamespace;
+
+use Doctrine\ORM\Mapping as ORM;
+use Dsantang\DomainEventsDoctrine\Outbox\OutboxMappedSuperclass;
+
+/**
+ * @ORM\Entity()
+ * @ORM\Table
+ */
+class YourOutboxEntity extends OutboxMappedSuperclass
+{
+    /**
+     * @ORM\Column(type="string")
+     *
+     * @var string
+     */
+    private $someAdditionalField;
+}
+```
+
+And an example of the required configuration as is follows:  
+**Warning:** this solution assumes that you're using `Dsantang\DomainEvents\DomainEvent` in order to raise your domain events.
+
+```php
+use Dsantang\DomainEventsDoctrine\Outbox\MapBased;
+use Dsantang\DomainEventsDoctrine\Outbox\OutboxMappedSuperclass;
+
+// Your class must extend OutboxMappedSuperclass
+$yourOutboxEntity = new YourOutboxEntity();
+
+$mapBased = new MapBased($yourOutboxEntity);
+$mapBased->addConverter('YouNamespace\YourDomainEvent', new YourOutboxConverter());
+
+// Always use with OnFlush event
+$evm->addEventListener([Events::onFlush], $mapBased);
+
+```
