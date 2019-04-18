@@ -59,8 +59,8 @@ final class ThirdOutboxEntry implements OutboxEntry
         return '{"foo":"bar"}';
     }
 
-    public function getSchemaVersion() : int
+    public function getSchemaVersion() : string
     {
-        return 2;
+        return '3.0.0';
     }
 }
