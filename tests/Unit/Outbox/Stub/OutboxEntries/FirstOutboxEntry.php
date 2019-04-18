@@ -54,8 +54,8 @@ final class FirstOutboxEntry implements OutboxEntry
         return '{"foo":"bar"}';
     }
 
-    public function getSchemaVersion() : int
+    public function getSchemaVersion() : string
     {
-        return 5;
+        return '1.0.0';
     }
 }
