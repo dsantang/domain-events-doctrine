@@ -54,9 +54,12 @@ final class SecondOutboxEntry implements OutboxEntry
         return $this->domainEvent->getName();
     }
 
-    public function getPayload() : string
+    /**
+     * @return mixed[]
+     */
+    public function getPayload() : array
     {
-        return '{"foo":"bar"}';
+        return ['foo' => 'bar'];
     }
 
     public function getSchemaVersion() : int

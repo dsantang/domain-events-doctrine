@@ -20,7 +20,10 @@ interface OutboxEntry
 
     public function getPayloadType() : string;
 
-    public function getPayload() : string;
+    /**
+     * @return mixed[]
+     */
+    public function getPayload() : array;
 
     public function getSchemaVersion() : int;
 }
