@@ -73,9 +73,9 @@ abstract class OutboxMappedSuperclass
     protected $payload;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="integer")
      *
-     * @var string
+     * @var int
      */
     protected $schemaVersion;
 
