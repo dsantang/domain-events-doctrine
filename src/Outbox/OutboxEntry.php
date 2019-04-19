@@ -22,5 +22,5 @@ interface OutboxEntry
 
     public function getPayload() : string;
 
-    public function getSchemaVersion() : string;
+    public function getSchemaVersion() : int;
 }

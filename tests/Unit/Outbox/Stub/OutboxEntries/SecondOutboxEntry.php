@@ -59,8 +59,8 @@ final class SecondOutboxEntry implements OutboxEntry
         return '{"foo":"bar"}';
     }
 
-    public function getSchemaVersion() : string
+    public function getSchemaVersion() : int
     {
-        return '2.0.0';
+        return 1;
     }
 }
