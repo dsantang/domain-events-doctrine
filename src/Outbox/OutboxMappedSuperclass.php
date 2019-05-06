@@ -86,8 +86,18 @@ abstract class OutboxMappedSuperclass
      */
     protected $createdAt;
 
-    public function fromOutboxEntry(OutboxEntry $outboxEntry) : OutboxMappedSuperclass
-    {
+    /**
+     * @ORM\Column(type="uuid", nullable=true)
+     * @ORM\OneToOne(targetEntity=OutboxMappedSuperclass::class)
+     *
+     * @var UuidInterface|null
+     */
+    protected $previousEvent;
+
+    public function fromOutboxEntry(
+        OutboxEntry $outboxEntry,
+        ?OutboxMappedSuperclass $previousEntity = null
+    ) : OutboxMappedSuperclass {
         $outbox = clone $this;
 
         $outbox->id            = Uuid::uuid4();
@@ -101,6 +111,15 @@ abstract class OutboxMappedSuperclass
         $outbox->schemaVersion = $outboxEntry->getSchemaVersion();
         $outbox->createdAt     = new DateTimeImmutable();
 
+        if ($previousEntity instanceof OutboxMappedSuperclass) {
+            $outbox->previousEvent = $previousEntity->getId();
+        }
+
         return $outbox;
+    }
+
+    private function getId() : UuidInterface
+    {
+        return $this->id;
     }
 }
