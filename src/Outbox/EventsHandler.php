@@ -68,9 +68,13 @@ abstract class EventsHandler
             return;
         }
 
+        $previousEntity = null;
+
         foreach ($outboxEntries as $outboxEntry) {
-            $entity = $this->outboxMappedSuperclass->fromOutboxEntry($outboxEntry);
+            $entity = $this->outboxMappedSuperclass->fromOutboxEntry($outboxEntry, $previousEntity);
             $entityManager->persist($entity);
+
+            $previousEntity = $entity;
         }
 
         $entityManager->getUnitOfWork()->computeChangeSets();
