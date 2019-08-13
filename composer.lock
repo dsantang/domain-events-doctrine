@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "21c87779e79f417cb6449f6adc306a59",
+    "content-hash": "bb0ec12d684211f961e71f42a8c2d4d6",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -869,16 +869,16 @@
         },
         {
             "name": "dsantang/domain-events",
-            "version": "v0.3.0",
+            "version": "v0.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dsantang/domain-events.git",
-                "reference": "bc36f807849e2dea29e64d13aaf4b941b59e31fb"
+                "reference": "4b070858a9f5a2b0e480d815218fc6144c56d157"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dsantang/domain-events/zipball/bc36f807849e2dea29e64d13aaf4b941b59e31fb",
-                "reference": "bc36f807849e2dea29e64d13aaf4b941b59e31fb",
+                "url": "https://api.github.com/repos/dsantang/domain-events/zipball/4b070858a9f5a2b0e480d815218fc6144c56d157",
+                "reference": "4b070858a9f5a2b0e480d815218fc6144c56d157",
                 "shasum": ""
             },
             "require": {
@@ -913,7 +913,7 @@
                 "dispatcher",
                 "domain event"
             ],
-            "time": "2019-02-15T14:31:03+00:00"
+            "time": "2019-08-12T14:22:46+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1227,7 +1227,7 @@
                 },
                 {
                     "name": "Gert de Pagter",
-                    "email": "backendtea@gmail.com"
+                    "email": "BackEndTea@gmail.com"
                 }
             ],
             "description": "Symfony polyfill for ctype functions",
@@ -1783,7 +1783,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette Bootstrap: the simple way to configure and bootstrap your Nette application.",
+            "description": "🅱 Nette Bootstrap: the simple way to configure and bootstrap your Nette application.",
             "homepage": "https://nette.org",
             "keywords": [
                 "bootstrapping",
@@ -1848,7 +1848,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette Dependency Injection Container: Flexible, compiled and full-featured DIC with perfectly usable autowiring and support for all new PHP 7.1 features.",
+            "description": "💎 Nette Dependency Injection Container: Flexible, compiled and full-featured DIC with perfectly usable autowiring and support for all new PHP 7.1 features.",
             "homepage": "https://nette.org",
             "keywords": [
                 "compiled",
@@ -1913,7 +1913,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette Finder: find files and directories with an intuitive API.",
+            "description": "🔍 Nette Finder: find files and directories with an intuitive API.",
             "homepage": "https://nette.org",
             "keywords": [
                 "filesystem",
@@ -1973,7 +1973,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette NEON: encodes and decodes NEON file format.",
+            "description": "🍸 Nette NEON: encodes and decodes NEON file format.",
             "homepage": "http://ne-on.org",
             "keywords": [
                 "export",
@@ -2036,7 +2036,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette PHP Generator: generates neat PHP code for you. Supports new PHP 7.3 features.",
+            "description": "🐘 Nette PHP Generator: generates neat PHP code for you. Supports new PHP 7.3 features.",
             "homepage": "https://nette.org",
             "keywords": [
                 "code",
@@ -2100,7 +2100,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette RobotLoader: high performance and comfortable autoloader that will search and autoload classes within your application.",
+            "description": "🍀 Nette RobotLoader: high performance and comfortable autoloader that will search and autoload classes within your application.",
             "homepage": "https://nette.org",
             "keywords": [
                 "autoload",
@@ -2173,7 +2173,7 @@
                     "homepage": "https://nette.org/contributors"
                 }
             ],
-            "description": "? Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.",
+            "description": "🛠 Nette Utils: lightweight utilities for string & array manipulation, image handling, safe JSON encoding/decoding, validation, slug or strong password generating etc.",
             "homepage": "https://nette.org",
             "keywords": [
                 "array",

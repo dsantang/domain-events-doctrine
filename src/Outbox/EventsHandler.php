@@ -8,10 +8,12 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\UnitOfWork;
 use Dsantang\DomainEvents\Counter;
+use Dsantang\DomainEvents\DeletionAware;
 use Dsantang\DomainEvents\DomainEvent;
 use Dsantang\DomainEvents\EventAware;
 use function array_filter;
 use function array_merge;
+use function array_push;
 use function count;
 use function ksort;
 
@@ -47,12 +49,16 @@ abstract class EventsHandler
     protected function getDomainEvents(OnFlushEventArgs $eventArgs) : array
     {
         $unitOfWork = $eventArgs->getEntityManager()
-            ->getUnitOfWork();
+                                ->getUnitOfWork();
 
         $events = [];
 
         foreach (self::getEventAwareEntities($unitOfWork) as $entity) {
             $events += $entity->expelRecordedEvents();
+        }
+
+        foreach (self::getDeletionAwareEntities($unitOfWork) as $entity) {
+            array_push($events, $entity->expelDeletionEvents());
         }
 
         ksort($events);
@@ -93,6 +99,16 @@ abstract class EventsHandler
 
         return array_filter($entities, static function ($entity) {
             return $entity instanceof EventAware;
+        });
+    }
+
+    /**
+     * @return DeletionAware[]
+     */
+    private static function getDeletionAwareEntities(UnitOfWork $unitOfWork) : array
+    {
+        return array_filter($unitOfWork->getScheduledEntityDeletions(), static function ($entity) {
+            return $entity instanceof DeletionAware;
         });
     }
 }

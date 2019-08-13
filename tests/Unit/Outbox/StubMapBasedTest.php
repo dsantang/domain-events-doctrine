@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\UnitOfWork;
 use Dsantang\DomainEvents\Counter;
 use Dsantang\DomainEventsDoctrine\Tests\OutboxSubClass;
+use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\DomainEvents\DeletionEvent;
 use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\DomainEvents\FirstDomainEvent;
 use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\DomainEvents\SecondDomainEvent;
 use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\DomainEvents\ThirdDomainEvent;
@@ -31,7 +32,7 @@ final class StubMapBasedTest extends TestCase
         $this->unitOfWork    = $this->createMock(UnitOfWork::class);
     }
 
-    public function testGetDomainsEvents() : void
+    public function testGetDomainsEventsReturnsAllExpectedEvents() : void
     {
         Counter::reset();
 
@@ -45,9 +46,9 @@ final class StubMapBasedTest extends TestCase
 
         self::assertEquals(0, Counter::getNext());
 
-        $eventsExpected = [new FirstDomainEvent(), new SecondDomainEvent(), new ThirdDomainEvent()];
+        $eventsExpected = [new FirstDomainEvent(), new SecondDomainEvent(), new ThirdDomainEvent(), new DeletionEvent()];
 
-        self::assertEquals(array_values($eventsResult), array_values($eventsExpected));
+         self::assertEquals(array_values($eventsExpected), array_values($eventsResult));
     }
 
     /**
