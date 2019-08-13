@@ -5,9 +5,11 @@ declare(strict_types=1);
 namespace Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox;
 
 use Doctrine\ORM\Event\OnFlushEventArgs;
+use Dsantang\DomainEvents\DeletionAware;
 use Dsantang\DomainEvents\DomainEvent;
 use Dsantang\DomainEvents\EventAware;
 use Dsantang\DomainEvents\Registry\OrderedEventRegistry;
+use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\DomainEvents\DeletionEvent;
 use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\DomainEvents\FirstDomainEvent;
 use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\DomainEvents\SecondDomainEvent;
 use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\DomainEvents\ThirdDomainEvent;
@@ -56,6 +58,15 @@ trait EventArgsProvider
                 }
             };
 
+            $entity4 = new class() implements DeletionAware {
+                use OrderedEventRegistry;
+
+                public function expelDeletionEvents() : DomainEvent
+                {
+                    return new DeletionEvent();
+                }
+            };
+
             $domainEvent1 = new FirstDomainEvent();
             $domainEvent2 = new SecondDomainEvent();
             $domainEvent3 = new ThirdDomainEvent();
@@ -65,7 +76,7 @@ trait EventArgsProvider
             $entity3->trigger($domainEvent3);
 
             $updates   = [$entity3];
-            $deletions = [$entity2, $entity1];
+            $deletions = [$entity2, $entity1, $entity4];
         }
 
         $this->unitOfWork->expects(self::any())->method('getScheduledEntityInsertions')->willReturn($insertions);
