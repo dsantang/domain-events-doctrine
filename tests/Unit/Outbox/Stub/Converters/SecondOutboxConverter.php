@@ -11,7 +11,7 @@ use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\OutboxEntries\SecondOut
 
 final class SecondOutboxConverter implements Converter
 {
-    public function convert(DomainEvent $domainEvent) : OutboxEntry
+    public function convert(DomainEvent $domainEvent): OutboxEntry
     {
         return new SecondOutboxEntry($domainEvent);
     }

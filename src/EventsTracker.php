@@ -13,9 +13,9 @@ use Dsantang\DomainEvents\DomainEvent;
 final class EventsTracker implements Aggregator, Releaser
 {
     /** @var DomainEvent[] */
-    private $events = [];
+    private array $events = [];
 
-    public function aggregate(DomainEvent ...$events) : void
+    public function aggregate(DomainEvent ...$events): void
     {
         $this->events = $events;
     }
@@ -23,7 +23,7 @@ final class EventsTracker implements Aggregator, Releaser
     /**
      * @return DomainEvent[]
      */
-    public function release() : array
+    public function release(): array
     {
         $events = $this->events;
 

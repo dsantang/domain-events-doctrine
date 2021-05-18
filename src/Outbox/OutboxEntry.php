@@ -8,22 +8,22 @@ use Ramsey\Uuid\UuidInterface;
 
 interface OutboxEntry
 {
-    public function getMessageKey() : string;
+    public function getMessageKey(): string;
 
-    public function getMessageRoute() : string;
+    public function getMessageRoute(): string;
 
-    public function getMessageType() : string;
+    public function getMessageType(): string;
 
-    public function getAggregateId() : UuidInterface;
+    public function getAggregateId(): UuidInterface;
 
-    public function getAggregateType() : string;
+    public function getAggregateType(): string;
 
-    public function getPayloadType() : string;
+    public function getPayloadType(): string;
 
     /**
      * @return mixed[]
      */
-    public function getPayload() : array;
+    public function getPayload(): array;
 
-    public function getSchemaVersion() : int;
+    public function getSchemaVersion(): int;
 }

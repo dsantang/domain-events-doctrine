@@ -8,7 +8,7 @@ use Dsantang\DomainEvents\DomainEvent;
 
 final class FirstDomainEvent implements DomainEvent
 {
-    public function getName() : string
+    public function getName(): string
     {
         return 'first';
     }

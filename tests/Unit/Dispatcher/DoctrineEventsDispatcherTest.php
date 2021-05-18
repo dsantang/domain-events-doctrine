@@ -18,7 +18,7 @@ final class DoctrineEventsDispatcherTest extends TestCase
     /**
      * @test
      */
-    public function postFlushShouldDispatchAllEvents() : void
+    public function postFlushShouldDispatchAllEvents(): void
     {
         $domainEvent = $this->createMock(DomainEvent::class);
         $domainEvent->expects(self::once())
@@ -35,7 +35,7 @@ final class DoctrineEventsDispatcherTest extends TestCase
 
         $dispatcher->expects(self::once())
                    ->method('dispatch')
-                   ->with(self::EVENT_NAME, self::isInstanceOf(SymfonyEvent::class));
+                   ->with(self::isInstanceOf(SymfonyEvent::class), self::EVENT_NAME);
 
         $eventDispatcher = new SimpleEventsDispatcher($releaser, $dispatcher);
 

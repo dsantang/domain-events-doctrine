@@ -10,7 +10,7 @@ final class RandomDomainEvent implements DomainEvent
 {
     public const EVENT_NAME = 'OrderDispatched';
 
-    public function getName() : string
+    public function getName(): string
     {
         return self::EVENT_NAME;
     }

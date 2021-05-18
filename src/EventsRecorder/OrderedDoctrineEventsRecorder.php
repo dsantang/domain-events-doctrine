@@ -9,21 +9,21 @@ use Doctrine\ORM\UnitOfWork;
 use Dsantang\DomainEvents\Counter;
 use Dsantang\DomainEvents\EventAware;
 use Dsantang\DomainEventsDoctrine\Aggregator;
+
 use function array_filter;
 use function array_merge;
 use function ksort;
 
 final class OrderedDoctrineEventsRecorder
 {
-    /** @var Aggregator */
-    private $eventsAggregator;
+    private Aggregator $eventsAggregator;
 
     public function __construct(Aggregator $eventAggregator)
     {
         $this->eventsAggregator = $eventAggregator;
     }
 
-    public function onFlush(OnFlushEventArgs $eventArgs) : void
+    public function onFlush(OnFlushEventArgs $eventArgs): void
     {
         $unitOfWork = $eventArgs->getEntityManager()
                                 ->getUnitOfWork();
@@ -43,7 +43,7 @@ final class OrderedDoctrineEventsRecorder
     /**
      * @return EventAware[]
      */
-    private static function getEventAwareEntities(UnitOfWork $unitOfWork) : array
+    private static function getEventAwareEntities(UnitOfWork $unitOfWork): array
     {
         $entities = array_merge(
             $unitOfWork->getScheduledEntityInsertions(),
@@ -51,8 +51,6 @@ final class OrderedDoctrineEventsRecorder
             $unitOfWork->getScheduledEntityDeletions()
         );
 
-        return array_filter($entities, static function ($entity) {
-            return $entity instanceof EventAware;
-        });
+        return array_filter($entities, static fn ($entity): bool => $entity instanceof EventAware);
     }
 }

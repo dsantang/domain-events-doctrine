@@ -8,8 +8,11 @@ test: test-unit test-mutation ## Runs all test suite
 test-unit: ## Runs unit tests
 	vendor/bin/phpunit --testsuite unit $(FLAGS)
 
+test-integration: ## Runs integration tests
+	vendor/bin/phpunit --testsuite integration $(FLAGS)
+
 test-mutation: ## Runs mutation tests, maximum strictness
-	vendor/bin/infection  --test-framework-options='--testsuite=unit' -s --threads=4 --min-msi=100 --min-covered-msi=100 $(FLAGS)
+	XDEBUG_MODE=coverage vendor/bin/infection  --test-framework-options='--testsuite=unit' -s --threads=4 --min-msi=100 --min-covered-msi=100 $(FLAGS)
 
 cs-fix: ## Runs phpcbf
 	vendor/bin/phpcbf
@@ -19,6 +22,9 @@ cs-check: ## Runs phpcs
 
 static-analysis: ## Runs static analysis with phpstan
 	vendor/bin/phpstan analyse
+
+composer-require-checker: ## Checks if all root dependencies are declared
+	vendor/bin/composer-require-checker check
 
 install-ci: ## Install dependencies with composer with flags -a -n
 	composer install $(CI_COMPOSER_FLAGS)

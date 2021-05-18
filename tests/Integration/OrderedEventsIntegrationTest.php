@@ -21,22 +21,19 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 final class OrderedEventsIntegrationTest extends TestCase
 {
-    /** @var EventsTracker */
-    private $tracker;
+    private EventsTracker $tracker;
 
-    /** @var OrderedDoctrineEventsRecorder */
-    private $recorder;
+    private OrderedDoctrineEventsRecorder $recorder;
 
     /** @var EventDispatcherInterface|MockObject */
     private $eventDispatcher;
 
-    /** @var SimpleEventsDispatcher */
-    private $doctrineDispatcher;
+    private SimpleEventsDispatcher $doctrineDispatcher;
 
     /**
      * @before
      */
-    public function setUpDependencies() : void
+    public function setUpDependencies(): void
     {
         $this->tracker            = new EventsTracker();
         $this->recorder           = new OrderedDoctrineEventsRecorder($this->tracker);
@@ -50,22 +47,22 @@ final class OrderedEventsIntegrationTest extends TestCase
     /**
      * @test
      */
-    public function orderInWhichTheEventsHaveBeenRaisedIsPreserved() : void
+    public function orderInWhichTheEventsHaveBeenRaisedIsPreserved(): void
     {
         $event1 = new class implements DomainEvent {
-            public function getName() : string
+            public function getName(): string
             {
                 return 'first';
             }
         };
         $event2 = new class implements DomainEvent {
-            public function getName() : string
+            public function getName(): string
             {
                 return 'second';
             }
         };
         $event3 = new class implements DomainEvent {
-            public function getName() : string
+            public function getName(): string
             {
                 return 'third';
             }
@@ -74,7 +71,7 @@ final class OrderedEventsIntegrationTest extends TestCase
         $entity1 = new class implements EventAware{
             use OrderedEventRegistry;
 
-            public function trigger(DomainEvent $event) : void
+            public function trigger(DomainEvent $event): void
             {
                 $this->triggeredA($event);
             }
@@ -83,7 +80,7 @@ final class OrderedEventsIntegrationTest extends TestCase
         $entity2 = new class implements EventAware {
             use OrderedEventRegistry;
 
-            public function trigger(DomainEvent $event) : void
+            public function trigger(DomainEvent $event): void
             {
                 $this->triggeredA($event);
             }
@@ -117,9 +114,9 @@ final class OrderedEventsIntegrationTest extends TestCase
         $this->eventDispatcher->/** @scrutinizer ignore-call */expects(self::exactly(3))
                               ->method('dispatch')
                               ->withConsecutive(
-                                  ['first', new SymfonyEvent($event1)],
-                                  ['second', new SymfonyEvent($event2)],
-                                  ['third', new SymfonyEvent($event3)]
+                                  [new SymfonyEvent($event1), 'first'],
+                                  [new SymfonyEvent($event2), 'second'],
+                                  [new SymfonyEvent($event3), 'third']
                               );
 
         self::assertEquals(3, Counter::getNext());

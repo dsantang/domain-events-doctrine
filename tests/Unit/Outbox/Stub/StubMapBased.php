@@ -15,12 +15,12 @@ final class StubMapBased extends EventsHandler
     /**
      * @return DomainEvent[] array
      */
-    public function getDomainEvents(OnFlushEventArgs $eventArgs) : array
+    public function getDomainEvents(OnFlushEventArgs $eventArgs): array
     {
         return parent::getDomainEvents($eventArgs);
     }
 
-    public function persist(EntityManagerInterface $entityManager, OutboxEntry ...$outboxEntries) : void
+    public function persist(EntityManagerInterface $entityManager, OutboxEntry ...$outboxEntries): void
     {
         parent::persist($entityManager, ...$outboxEntries);
     }
@@ -30,7 +30,7 @@ final class StubMapBased extends EventsHandler
      *
      * @var DomainEvent[] $domainEvents
      */
-    protected function convert(DomainEvent ...$domainEvents) : array
+    protected function convert(DomainEvent ...$domainEvents): array
     {
         return [];
     }

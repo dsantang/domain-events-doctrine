@@ -8,7 +8,7 @@ use Dsantang\DomainEvents\DomainEvent;
 
 final class DeletionEvent implements DomainEvent
 {
-    public function getName() : string
+    public function getName(): string
     {
         return 'deletion';
     }

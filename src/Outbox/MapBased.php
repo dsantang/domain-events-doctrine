@@ -6,6 +6,7 @@ namespace Dsantang\DomainEventsDoctrine\Outbox;
 
 use Dsantang\DomainEvents\DomainEvent;
 use InvalidArgumentException;
+
 use function class_exists;
 use function get_class;
 use function sprintf;
@@ -13,9 +14,9 @@ use function sprintf;
 final class MapBased extends EventsHandler
 {
     /** @var Converter[] */
-    private $conversionMap;
+    private array $conversionMap;
 
-    public function addConverter(string $domainEventClass, Converter $converter) : void
+    public function addConverter(string $domainEventClass, Converter $converter): void
     {
         if (! class_exists($domainEventClass)) {
             throw new InvalidArgumentException(
@@ -31,7 +32,7 @@ final class MapBased extends EventsHandler
      *
      * @var DomainEvent[] $domainEvents
      */
-    public function convert(DomainEvent ...$domainEvents) : array
+    public function convert(DomainEvent ...$domainEvents): array
     {
         $outboxEntries = [];
 

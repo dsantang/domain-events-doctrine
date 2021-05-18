@@ -8,6 +8,7 @@ use Doctrine\ORM\Event\OnFlushEventArgs;
 use Doctrine\ORM\UnitOfWork;
 use Dsantang\DomainEvents\EventAware;
 use Dsantang\DomainEventsDoctrine\Aggregator;
+
 use function array_filter;
 use function array_merge;
 
@@ -16,15 +17,14 @@ use function array_merge;
  */
 final class DoctrineEventsRecorder
 {
-    /** @var Aggregator */
-    private $eventAggregator;
+    private Aggregator $eventAggregator;
 
     public function __construct(Aggregator $eventAggregator)
     {
         $this->eventAggregator = $eventAggregator;
     }
 
-    public function onFlush(OnFlushEventArgs $eventArgs) : void
+    public function onFlush(OnFlushEventArgs $eventArgs): void
     {
         $unitOfWork = $eventArgs->getEntityManager()
                                 ->getUnitOfWork();
@@ -41,7 +41,7 @@ final class DoctrineEventsRecorder
     /**
      * @return EventAware[]
      */
-    private static function getEventAwareEntities(UnitOfWork $unitOfWork) : array
+    private static function getEventAwareEntities(UnitOfWork $unitOfWork): array
     {
         $entities = array_merge(
             $unitOfWork->getScheduledEntityInsertions(),
@@ -49,8 +49,6 @@ final class DoctrineEventsRecorder
             $unitOfWork->getScheduledEntityDeletions()
         );
 
-        return array_filter($entities, static function ($entity) {
-            return $entity instanceof EventAware;
-        });
+        return array_filter($entities, static fn ($entity): bool => $entity instanceof EventAware);
     }
 }

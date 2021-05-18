@@ -11,6 +11,7 @@ use Dsantang\DomainEvents\Counter;
 use Dsantang\DomainEvents\DeletionAware;
 use Dsantang\DomainEvents\DomainEvent;
 use Dsantang\DomainEvents\EventAware;
+
 use function array_filter;
 use function array_merge;
 use function array_push;
@@ -19,8 +20,7 @@ use function ksort;
 
 abstract class EventsHandler
 {
-    /** @var OutboxMappedSuperclass */
-    protected $outboxMappedSuperclass;
+    protected OutboxMappedSuperclass $outboxMappedSuperclass;
 
     public function __construct(OutboxMappedSuperclass $outboxMappedSuperclass)
     {
@@ -29,12 +29,10 @@ abstract class EventsHandler
 
     /**
      * @return OutboxEntry[]
-     *
-     * @var DomainEvent[] $domainEvents
      */
-    abstract protected function convert(DomainEvent ...$domainEvents) : array;
+    abstract protected function convert(DomainEvent ...$domainEvents): array;
 
-    public function onFlush(OnFlushEventArgs $eventArgs) : void
+    public function onFlush(OnFlushEventArgs $eventArgs): void
     {
         $domainEvents = $this->getDomainEvents($eventArgs);
 
@@ -46,7 +44,7 @@ abstract class EventsHandler
     /**
      * @return DomainEvent[]
      */
-    protected function getDomainEvents(OnFlushEventArgs $eventArgs) : array
+    protected function getDomainEvents(OnFlushEventArgs $eventArgs): array
     {
         $unitOfWork = $eventArgs->getEntityManager()
                                 ->getUnitOfWork();
@@ -68,7 +66,7 @@ abstract class EventsHandler
         return $events;
     }
 
-    protected function persist(EntityManagerInterface $entityManager, OutboxEntry ...$outboxEntries) : void
+    protected function persist(EntityManagerInterface $entityManager, OutboxEntry ...$outboxEntries): void
     {
         if (count($outboxEntries) <= 0) {
             return;
@@ -89,7 +87,7 @@ abstract class EventsHandler
     /**
      * @return EventAware[]
      */
-    private static function getEventAwareEntities(UnitOfWork $unitOfWork) : array
+    private static function getEventAwareEntities(UnitOfWork $unitOfWork): array
     {
         $entities = array_merge(
             $unitOfWork->getScheduledEntityInsertions(),
@@ -97,18 +95,17 @@ abstract class EventsHandler
             $unitOfWork->getScheduledEntityDeletions()
         );
 
-        return array_filter($entities, static function ($entity) {
-            return $entity instanceof EventAware;
-        });
+        return array_filter($entities, static fn ($entity): bool => $entity instanceof EventAware);
     }
 
     /**
      * @return DeletionAware[]
      */
-    private static function getDeletionAwareEntities(UnitOfWork $unitOfWork) : array
+    private static function getDeletionAwareEntities(UnitOfWork $unitOfWork): array
     {
-        return array_filter($unitOfWork->getScheduledEntityDeletions(), static function ($entity) {
-            return $entity instanceof DeletionAware;
-        });
+        return array_filter(
+            $unitOfWork->getScheduledEntityDeletions(),
+            static fn ($entity): bool => $entity instanceof DeletionAware
+        );
     }
 }
