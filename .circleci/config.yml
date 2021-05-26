@@ -5,16 +5,18 @@ workflows:
   quality-tools:
     jobs:
       - unit-tests
+      - integration-tests
       - mutation-tests:
           requires:
             - unit-tests
       - phpstan
       - phpcs
+      - composer-require-checker
 
 jobs:
   unit-tests:
     docker:
-      - image: circleci/php:7.2
+      - image: circleci/php:7.4
     steps:
       - run: sudo composer self-update
       - checkout
@@ -38,9 +40,35 @@ jobs:
       - store_artifacts:
           path: ~/phpunit
 
+  integration-tests:
+    docker:
+      - image: circleci/php:7.4
+    steps:
+      - run: sudo composer self-update
+      - checkout
+      - restore_cache:
+          keys:
+            - project-dependencies-{{ checksum "~/project/composer.lock" }}
+            - composer-cache
+      - run: make install-ci
+      - save_cache:
+          key: project-dependencies-{{ checksum "~/project/composer.lock" }}
+          paths:
+            - ~/project/vendor
+      - save_cache:
+          key: composer-cache
+          paths:
+            - ~/.composer/cache
+      - run: mkdir -p ~/phpunit
+      - run: make test-integration FLAGS="--log-junit ~/phpunit/integration.xml"
+      - store_test_results:
+          path: ~/phpunit
+      - store_artifacts:
+          path: ~/phpunit
+
   mutation-tests:
     docker:
-      - image: circleci/php:7.2
+      - image: circleci/php:7.4
     steps:
       - run: sudo composer self-update
       - checkout
@@ -61,7 +89,7 @@ jobs:
 
   phpstan:
     docker:
-      - image: circleci/php:7.2
+      - image: circleci/php:7.4
     steps:
       - run: sudo composer self-update
       - checkout
@@ -82,7 +110,7 @@ jobs:
 
   phpcs:
     docker:
-      - image: circleci/php:7.2
+      - image: circleci/php:7.4
     steps:
       - run: sudo composer self-update
       - checkout
@@ -100,3 +128,24 @@ jobs:
           paths:
             - ~/.composer/cache
       - run: make cs-check
+
+  composer-require-checker:
+    docker:
+      - image: circleci/php:7.4
+    steps:
+      - run: sudo composer self-update
+      - checkout
+      - restore_cache:
+          keys:
+            - project-dependencies-{{ checksum "~/project/composer.lock" }}
+            - composer-cache
+      - run: make install-ci
+      - save_cache:
+          key: project-dependencies-{{ checksum "~/project/composer.lock" }}
+          paths:
+            - ~/project/vendor
+      - save_cache:
+          key: composer-cache
+          paths:
+            - ~/.composer/cache
+      - run: make composer-require-checker

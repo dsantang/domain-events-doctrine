@@ -11,45 +11,44 @@ use Ramsey\Uuid\UuidInterface;
 
 final class SecondOutboxEntry implements OutboxEntry
 {
-    /** @var DomainEvent */
-    private $domainEvent;
+    private DomainEvent $domainEvent;
 
     public function __construct(DomainEvent $domainEvent)
     {
         $this->domainEvent = $domainEvent;
     }
 
-    public function getName() : string
+    public function getName(): string
     {
         return 'CartCreated';
     }
 
-    public function getAggregateId() : UuidInterface
+    public function getAggregateId(): UuidInterface
     {
         return Uuid::fromString('cece22ea-57ae-11e9-8647-d663bd873d93');
     }
 
-    public function getAggregateType() : string
+    public function getAggregateType(): string
     {
         return 'Cart';
     }
 
-    public function getPayloadType() : string
+    public function getPayloadType(): string
     {
         return 'CartType';
     }
 
-    public function getMessageKey() : string
+    public function getMessageKey(): string
     {
         return 'af422e7a';
     }
 
-    public function getMessageRoute() : string
+    public function getMessageRoute(): string
     {
         return 'snapshot.cart';
     }
 
-    public function getMessageType() : string
+    public function getMessageType(): string
     {
         return $this->domainEvent->getName();
     }
@@ -57,12 +56,12 @@ final class SecondOutboxEntry implements OutboxEntry
     /**
      * @return mixed[]
      */
-    public function getPayload() : array
+    public function getPayload(): array
     {
         return ['foo' => 'bar'];
     }
 
-    public function getSchemaVersion() : int
+    public function getSchemaVersion(): int
     {
         return 1;
     }

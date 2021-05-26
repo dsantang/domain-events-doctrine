@@ -11,5 +11,5 @@ interface Releaser
     /**
      * @return DomainEvent[]
      */
-    public function release() : array;
+    public function release(): array;
 }

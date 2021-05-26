@@ -11,7 +11,7 @@ use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\OutboxEntries\ThirdOutb
 
 final class ThirdOutboxConverter implements Converter
 {
-    public function convert(DomainEvent $domainEvent) : OutboxEntry
+    public function convert(DomainEvent $domainEvent): OutboxEntry
     {
         return new ThirdOutboxEntry($domainEvent);
     }

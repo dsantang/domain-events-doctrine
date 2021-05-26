@@ -17,13 +17,12 @@ final class MapBasedEventsHandlerTest extends TestCase
 {
     use EventArgsProvider;
 
-    /** @var MapBased */
-    private $mapBasedEventsHandler;
+    private MapBased $mapBasedEventsHandler;
 
     /**
      * @before
      */
-    public function setUpDependencies() : void
+    public function setUpDependencies(): void
     {
         $this->mapBasedEventsHandler = new MapBased(new OutboxSubClass());
 
@@ -31,7 +30,7 @@ final class MapBasedEventsHandlerTest extends TestCase
         $this->unitOfWork    = $this->createMock(UnitOfWork::class);
     }
 
-    public function testOutboxHappyPathWorkflowOnFlushEvent() : void
+    public function testOutboxHappyPathWorkflowOnFlushEvent(): void
     {
         $this->mapBasedEventsHandler->addConverter(
             FirstDomainEvent::class,

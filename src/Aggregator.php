@@ -8,5 +8,5 @@ use Dsantang\DomainEvents\DomainEvent;
 
 interface Aggregator
 {
-    public function aggregate(DomainEvent ...$events) : void;
+    public function aggregate(DomainEvent ...$events): void;
 }

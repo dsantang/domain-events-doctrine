@@ -8,5 +8,5 @@ use Dsantang\DomainEvents\DomainEvent;
 
 interface Converter
 {
-    public function convert(DomainEvent $domainEvent) : OutboxEntry;
+    public function convert(DomainEvent $domainEvent): OutboxEntry;
 }

@@ -17,6 +17,7 @@ use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\OutboxEntries\SecondOut
 use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\OutboxEntries\ThirdOutboxEntry;
 use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\StubMapBased;
 use PHPUnit\Framework\TestCase;
+
 use function array_values;
 
 final class StubMapBasedTest extends TestCase
@@ -26,13 +27,13 @@ final class StubMapBasedTest extends TestCase
     /**
      * @before
      */
-    public function setUpDependencies() : void
+    public function setUpDependencies(): void
     {
         $this->entityManager = $this->createMock(EntityManagerInterface::class);
         $this->unitOfWork    = $this->createMock(UnitOfWork::class);
     }
 
-    public function testGetDomainsEventsReturnsAllExpectedEvents() : void
+    public function testGetDomainsEventsReturnsAllExpectedEvents(): void
     {
         Counter::reset();
 
@@ -54,7 +55,7 @@ final class StubMapBasedTest extends TestCase
     /**
      * @return mixed[] array
      */
-    public function persistDataProvider() : array
+    public function persistDataProvider(): array
     {
         return [
             [[], 0, 0],
@@ -64,7 +65,8 @@ final class StubMapBasedTest extends TestCase
                     new ThirdOutboxEntry(new ThirdDomainEvent()),
                     new FirstOutboxEntry(new FirstDomainEvent()),
                     new SecondOutboxEntry(new SecondDomainEvent()),
-                ], 3,
+                ],
+                3,
                 1,
             ],
         ];
@@ -75,7 +77,7 @@ final class StubMapBasedTest extends TestCase
      *
      * @dataProvider persistDataProvider
      */
-    public function testPersist(array $outboxEvents, int $persistCalls, int $computeChangeSetsCalls) : void
+    public function testPersist(array $outboxEvents, int $persistCalls, int $computeChangeSetsCalls): void
     {
         $eventArgs = $this->getEventArgs();
 

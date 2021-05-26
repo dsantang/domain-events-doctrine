@@ -13,26 +13,18 @@ use Dsantang\DomainEventsDoctrine\Outbox\OutboxMappedSuperclass;
  */
 class OutboxSubClass extends OutboxMappedSuperclass
 {
-    /**
-     * @ORM\Column(type="string", name="field_1", nullable=true)
-     *
-     * @var string
-     */
-    private $field1;
+    /** @ORM\Column(type="string", name="field_1", nullable=true) */
+    private string $field1;
 
-    /**
-     * @ORM\Column(type="string", name="field_2", nullable=true)
-     *
-     * @var string
-     */
-    private $field2;
+    /** @ORM\Column(type="string", name="field_2", nullable=true) */
+    private string $field2;
 
-    public function getField1() : string
+    public function getField1(): string
     {
         return $this->field1;
     }
 
-    public function getField2() : string
+    public function getField2(): string
     {
         return $this->field2;
     }

@@ -26,7 +26,7 @@ final class OrderedDoctrineEventsRecorderTest extends TestCase
      *
      * @test
      */
-    public function onFlushWillAggregateAllTheEventAwareEntities(object $eventAwareEntity, array $domainEvents) : void
+    public function onFlushWillAggregateAllTheEventAwareEntities(object $eventAwareEntity, array $domainEvents): void
     {
         $unitOfWork = $this->createMock(UnitOfWork::class);
 
@@ -70,9 +70,9 @@ final class OrderedDoctrineEventsRecorderTest extends TestCase
     /**
      * @return mixed[] array
      */
-    public function provideEventAwareChangedEntities() : array
+    public function provideEventAwareChangedEntities(): array
     {
-        $awareEntity = new class(new RandomDomainEvent()) implements EventAware {
+        $awareEntity = new class (new RandomDomainEvent()) implements EventAware {
             use EventsRegistry;
 
             public function __construct(DomainEvent $domainEvent)

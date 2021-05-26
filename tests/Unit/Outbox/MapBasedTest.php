@@ -18,6 +18,7 @@ use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\DomainEvents\SecondDoma
 use Dsantang\DomainEventsDoctrine\Tests\Unit\Outbox\Stub\DomainEvents\ThirdDomainEvent;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
+
 use function array_pop;
 
 final class MapBasedTest extends TestCase
@@ -25,12 +26,12 @@ final class MapBasedTest extends TestCase
     use EventArgsProvider;
 
     /** @var Converter[] */
-    private $conversionMap;
+    private array $conversionMap;
 
     /**
      * @before
      */
-    public function setUpDependencies() : void
+    public function setUpDependencies(): void
     {
         $this->conversionMap = [
             FirstDomainEvent::class  => new FirstOutboxConverter(),
@@ -42,7 +43,7 @@ final class MapBasedTest extends TestCase
         $this->unitOfWork    = $this->createMock(UnitOfWork::class);
     }
 
-    public function testDealWithInvalidKeyConversionMap() : void
+    public function testDealWithInvalidKeyConversionMap(): void
     {
         $this->expectException(InvalidArgumentException::class);
 
@@ -54,7 +55,7 @@ final class MapBasedTest extends TestCase
         );
     }
 
-    public function testConvert() : void
+    public function testConvert(): void
     {
         $mapBasedEventsHandler = new MapBased(new OutboxSubClass());
 
@@ -75,7 +76,7 @@ final class MapBasedTest extends TestCase
         self::assertEquals($expectedOutboxEvents, $returnedOutboxEvents);
     }
 
-    public function testConvertWithANonOutboxEntryDomainEvent() : void
+    public function testConvertWithANonOutboxEntryDomainEvent(): void
     {
         array_pop($this->conversionMap);
         $mapBasedEventsHandler = new MapBased(new OutboxSubClass());
@@ -96,7 +97,7 @@ final class MapBasedTest extends TestCase
         self::assertEquals($expectedOutboxEvents, $returnedOutboxEvents);
     }
 
-    public function testConvertANonOutboxRelatedDomainEvent() : void
+    public function testConvertANonOutboxRelatedDomainEvent(): void
     {
         $mapBasedEventsHandler = new MapBased(new OutboxSubClass());
 
@@ -113,7 +114,7 @@ final class MapBasedTest extends TestCase
         self::assertEquals($expectedOutboxEvents, $returnedOutboxEvents);
     }
 
-    public function testOnFlushWithDomainEvents() : void
+    public function testOnFlushWithDomainEvents(): void
     {
         $eventArgs = $this->getEventArgs();
 
@@ -128,7 +129,7 @@ final class MapBasedTest extends TestCase
         $mapBasedEventsHandler->onFlush($eventArgs);
     }
 
-    public function testOnFlushWithNoDomainEvents() : void
+    public function testOnFlushWithNoDomainEvents(): void
     {
         $eventArgs = $this->getEventArgs(false);
 

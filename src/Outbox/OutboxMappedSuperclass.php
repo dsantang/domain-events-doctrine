@@ -18,86 +18,50 @@ abstract class OutboxMappedSuperclass
     /**
      * @ORM\Id
      * @ORM\Column(type="uuid")
-     *
-     * @var UuidInterface
      */
-    protected $id;
+    protected UuidInterface $id;
 
-    /**
-     * @ORM\Column(type="string")
-     *
-     * @var string
-     */
-    protected $messageKey;
+    /** @ORM\Column(type="string") */
+    protected string $messageKey;
 
-    /**
-     * @ORM\Column(type="string")
-     *
-     * @var string
-     */
-    protected $messageRoute;
+    /** @ORM\Column(type="string") */
+    protected string $messageRoute;
 
-    /**
-     * @ORM\Column(type="string")
-     *
-     * @var string
-     */
-    protected $messageType;
+    /** @ORM\Column(type="string") */
+    protected string $messageType;
 
-    /**
-     * @ORM\Column(type="uuid")
-     *
-     * @var UuidInterface
-     */
-    protected $aggregateId;
+    /** @ORM\Column(type="uuid") */
+    protected UuidInterface $aggregateId;
 
-    /**
-     * @ORM\Column(type="string")
-     *
-     * @var string
-     */
-    protected $aggregateType;
+    /** @ORM\Column(type="string") */
+    protected string $aggregateType;
 
-    /**
-     * @ORM\Column(type="string")
-     *
-     * @var string
-     */
-    protected $payloadType;
+    /** @ORM\Column(type="string") */
+    protected string $payloadType;
 
     /**
      * @ORM\Column(type="json_array", options={"jsonb"=true})
      *
      * @var mixed[]
      */
-    protected $payload;
+    protected array $payload;
 
-    /**
-     * @ORM\Column(type="integer")
-     *
-     * @var int
-     */
-    protected $schemaVersion;
+    /** @ORM\Column(type="integer") */
+    protected int $schemaVersion;
 
-    /**
-     * @ORM\Column(type="utc_datetime_immutable")
-     *
-     * @var DateTimeImmutable
-     */
-    protected $createdAt;
+    /** @ORM\Column(type="utc_datetime_immutable") */
+    protected DateTimeImmutable $createdAt;
 
     /**
      * @ORM\Column(type="uuid", nullable=true)
      * @ORM\OneToOne(targetEntity=OutboxMappedSuperclass::class)
-     *
-     * @var UuidInterface|null
      */
-    protected $previousEvent;
+    protected ?UuidInterface $previousEvent = null;
 
     public function fromOutboxEntry(
         OutboxEntry $outboxEntry,
         ?OutboxMappedSuperclass $previousEntity = null
-    ) : OutboxMappedSuperclass {
+    ): OutboxMappedSuperclass {
         $outbox = clone $this;
 
         $outbox->id            = Uuid::uuid4();
@@ -118,7 +82,7 @@ abstract class OutboxMappedSuperclass
         return $outbox;
     }
 
-    private function getId() : UuidInterface
+    private function getId(): UuidInterface
     {
         return $this->id;
     }

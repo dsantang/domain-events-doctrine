@@ -12,6 +12,21 @@
             "ignore" : [
                 "Dsantang\\DomainEventsDoctrine\\EventsRecorder\\OrderedDoctrineEventsRecorder::onFlush"
             ]
+        },
+        "UnwrapArrayMerge" : {
+            "ignore": [
+                "Dsantang\\DomainEventsDoctrine\\EventsRecorder\\DoctrineEventsRecorder::onFlush"
+            ]
+        },
+        "CloneRemoval" : {
+            "ignore": [
+                "Dsantang\\DomainEventsDoctrine\\Outbox\\OutboxMappedSuperclass::fromOutboxEntry"
+            ]
+        },
+        "InstanceOf_" : {
+            "ignore": [
+                "Dsantang\\DomainEventsDoctrine\\Outbox\\OutboxMappedSuperclass::fromOutboxEntry"
+            ]
         }
     }
 }

@@ -9,11 +9,9 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 abstract class DoctrineEventsDispatcher
 {
-    /** @var Releaser */
-    protected $releaser;
+    protected Releaser $releaser;
 
-    /** @var EventDispatcherInterface */
-    protected $dispatcher;
+    protected EventDispatcherInterface $dispatcher;
 
     public function __construct(Releaser $releaser, EventDispatcherInterface $dispatcher)
     {
@@ -21,5 +19,5 @@ abstract class DoctrineEventsDispatcher
         $this->dispatcher = $dispatcher;
     }
 
-    abstract public function postFlush() : void;
+    abstract public function postFlush(): void;
 }

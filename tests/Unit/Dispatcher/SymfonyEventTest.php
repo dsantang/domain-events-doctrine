@@ -13,7 +13,7 @@ final class SymfonyEventTest extends TestCase
     /**
      * @test
      */
-    public function getNameReturnsCorrectName() : void
+    public function getNameReturnsCorrectName(): void
     {
         $event = new SymfonyEvent(new RandomDomainEvent());
 
@@ -23,7 +23,7 @@ final class SymfonyEventTest extends TestCase
     /**
      * @test
      */
-    public function getEventReturnsCorrectName() : void
+    public function getEventReturnsCorrectName(): void
     {
         $internalEvent = new RandomDomainEvent();
         $event         = new SymfonyEvent($internalEvent);

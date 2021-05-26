@@ -18,50 +18,50 @@ use PHPUnit\Framework\MockObject\MockObject;
 trait EventArgsProvider
 {
     /** @var MockObject entityManager */
-    private $entityManager;
+    private MockObject $entityManager;
 
     /** @var MockObject unitOfWork */
-    private $unitOfWork;
+    private MockObject $unitOfWork;
 
     /**
      * @return OnFlushEventArgs|MockObject
      */
-    private function getEventArgs(bool $withEvents = true) : OnFlushEventArgs
+    private function getEventArgs(bool $withEvents = true): OnFlushEventArgs
     {
         $insertions = $updates = $deletions = [];
 
         if ($withEvents) {
-            $entity1 = new class() implements EventAware {
+            $entity1 = new class () implements EventAware {
                 use OrderedEventRegistry;
 
-                public function trigger(DomainEvent $event) : void
+                public function trigger(DomainEvent $event): void
                 {
                     $this->triggeredA($event);
                 }
             };
 
-            $entity2 = new class() implements EventAware {
+            $entity2 = new class () implements EventAware {
                 use OrderedEventRegistry;
 
-                public function trigger(DomainEvent $event) : void
+                public function trigger(DomainEvent $event): void
                 {
                     $this->triggeredA($event);
                 }
             };
 
-            $entity3 = new class() implements EventAware {
+            $entity3 = new class () implements EventAware {
                 use OrderedEventRegistry;
 
-                public function trigger(DomainEvent $event) : void
+                public function trigger(DomainEvent $event): void
                 {
                     $this->triggeredA($event);
                 }
             };
 
-            $entity4 = new class() implements DeletionAware {
+            $entity4 = new class () implements DeletionAware {
                 use OrderedEventRegistry;
 
-                public function expelDeletionEvents() : DomainEvent
+                public function expelDeletionEvents(): DomainEvent
                 {
                     return new DeletionEvent();
                 }
