@@ -2,6 +2,9 @@
     "name": "dsantang/domain-events-doctrine",
     "description": "Package that provides an integration with Doctrine ORM to automatically dispatch Domain Events.",
     "type": "library",
+    "license": [
+        "MIT"
+    ],
     "keywords": [
         "domain event",
         "domain driven design",
