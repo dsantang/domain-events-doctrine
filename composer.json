@@ -34,7 +34,7 @@
     "require": {
         "php": "^7.4 || ^8.0",
         "doctrine/orm": "^2.8",
-        "dsantang/domain-events": "^0.4",
+        "dsantang/domain-events": "^0.5",
         "ramsey/uuid": "^4.1",
         "symfony/event-dispatcher": "^5.2",
         "symfony/event-dispatcher-contracts": "^2.4"
