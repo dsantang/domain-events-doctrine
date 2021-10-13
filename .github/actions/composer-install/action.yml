@@ -1,0 +1,20 @@
+name: Install dependencies
+description: Install dependencies with Composer
+runs:
+  using: 'composite'
+  steps:
+    - run: composer validate --strict
+      shell: bash
+
+    - id: composer-cache
+      run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+      shell: bash
+
+    - uses: actions/cache@v2
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+        restore-keys: ${{ runner.os }}-composer-
+
+    - run: composer install -a -n --no-progress
+      shell: bash

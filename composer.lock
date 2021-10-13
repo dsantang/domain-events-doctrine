@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "f6e6c6ba11efab9939c46ce650347610",
+    "content-hash": "e2dac01d96fb0ce79f1e25f9896c9ffb",
     "packages": [
         {
             "name": "brick/math",
@@ -1055,28 +1055,28 @@
         },
         {
             "name": "dsantang/domain-events",
-            "version": "v0.4.0",
+            "version": "v0.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/dsantang/domain-events.git",
-                "reference": "4b070858a9f5a2b0e480d815218fc6144c56d157"
+                "reference": "f8994a72d808301e5412b657a76e98022c5d55b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dsantang/domain-events/zipball/4b070858a9f5a2b0e480d815218fc6144c56d157",
-                "reference": "4b070858a9f5a2b0e480d815218fc6144c56d157",
+                "url": "https://api.github.com/repos/dsantang/domain-events/zipball/f8994a72d808301e5412b657a76e98022c5d55b6",
+                "reference": "f8994a72d808301e5412b657a76e98022c5d55b6",
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2"
+                "php": "^7.4 || ^8.0"
             },
             "require-dev": {
-                "doctrine/coding-standard": "^5.0",
-                "infection/infection": "^0.10.6",
-                "phpstan/phpstan": "^0.10.5",
-                "phpstan/phpstan-strict-rules": "^0.10.1",
-                "phpunit/phpunit": "^7.4",
-                "squizlabs/php_codesniffer": "^3.3"
+                "doctrine/coding-standard": "^9.0",
+                "infection/infection": "^0.25",
+                "phpstan/phpstan": "^0.12",
+                "phpstan/phpstan-strict-rules": "^0.12",
+                "phpunit/phpunit": "^9.0",
+                "squizlabs/php_codesniffer": "^3.6"
             },
             "suggest": {
                 "dsantang/domain-events-doctrine": "To automatically dispatch and listen to this package's domain events when a doctrine transaction is finished."
@@ -1088,9 +1088,18 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
             "authors": [
                 {
                     "name": "Davide Santangelo"
+                },
+                {
+                    "name": "Giacomo Pinato"
+                },
+                {
+                    "name": "Giacomo Fornari"
                 }
             ],
             "description": "A simple package that enables creation and caching of domain events.",
@@ -1101,9 +1110,9 @@
             ],
             "support": {
                 "issues": "https://github.com/dsantang/domain-events/issues",
-                "source": "https://github.com/dsantang/domain-events/tree/master"
+                "source": "https://github.com/dsantang/domain-events/tree/v0.5.0"
             },
-            "time": "2019-08-12T14:22:46+00:00"
+            "time": "2021-10-12T14:02:39+00:00"
         },
         {
             "name": "ocramius/package-versions",
@@ -6089,5 +6098,5 @@
         "php": "^7.4 || ^8.0"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.1.0"
 }
