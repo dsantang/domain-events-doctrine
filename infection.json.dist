@@ -25,7 +25,8 @@
         },
         "InstanceOf_" : {
             "ignore": [
-                "Dsantang\\DomainEventsDoctrine\\Outbox\\OutboxMappedSuperclass::fromOutboxEntry"
+                "Dsantang\\DomainEventsDoctrine\\Outbox\\OutboxMappedSuperclass::fromOutboxEntry",
+                "Dsantang\\DomainEventsDoctrine\\Outbox\\EventsHandler::getDeletionAwareEntities"
             ]
         }
     }
