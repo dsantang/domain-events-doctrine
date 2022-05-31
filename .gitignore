@@ -1,3 +1,4 @@
 /vendor/
 /.phpcs.cache
 /infection-log.txt
+.phpunit.result.cache
