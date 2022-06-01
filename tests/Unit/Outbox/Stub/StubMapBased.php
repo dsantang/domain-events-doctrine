@@ -27,8 +27,6 @@ final class StubMapBased extends EventsHandler
 
     /**
      * @return OutboxEntry[]
-     *
-     * @var DomainEvent[] $domainEvents
      */
     protected function convert(DomainEvent ...$domainEvents): array
     {

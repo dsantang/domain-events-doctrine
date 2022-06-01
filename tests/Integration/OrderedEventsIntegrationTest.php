@@ -15,7 +15,7 @@ use Dsantang\DomainEventsDoctrine\Dispatcher\SimpleEventsDispatcher;
 use Dsantang\DomainEventsDoctrine\Dispatcher\SymfonyEvent;
 use Dsantang\DomainEventsDoctrine\EventsRecorder\OrderedDoctrineEventsRecorder;
 use Dsantang\DomainEventsDoctrine\EventsTracker;
-use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\MockObject; // phpcs:ignore SlevomatCodingStandard.Namespaces.UnusedUses.UnusedUse
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
@@ -25,7 +25,7 @@ final class OrderedEventsIntegrationTest extends TestCase
 
     private OrderedDoctrineEventsRecorder $recorder;
 
-    private EventDispatcherInterface|MockObject $eventDispatcher;
+    private MockObject & EventDispatcherInterface $eventDispatcher;
 
     private SimpleEventsDispatcher $doctrineDispatcher;
 

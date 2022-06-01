@@ -28,8 +28,6 @@ final class MapBased extends EventsHandler
 
     /**
      * @return OutboxEntry[]
-     *
-     * @var DomainEvent[] $domainEvents
      */
     public function convert(DomainEvent ...$domainEvents): array
     {
