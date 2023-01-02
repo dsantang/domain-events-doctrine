@@ -8,7 +8,6 @@ use Dsantang\DomainEvents\DomainEvent;
 use InvalidArgumentException;
 
 use function class_exists;
-use function get_class;
 use function sprintf;
 
 final class MapBased extends EventsHandler
@@ -29,19 +28,17 @@ final class MapBased extends EventsHandler
 
     /**
      * @return OutboxEntry[]
-     *
-     * @var DomainEvent[] $domainEvents
      */
     public function convert(DomainEvent ...$domainEvents): array
     {
         $outboxEntries = [];
 
         foreach ($domainEvents as $domainEvent) {
-            if (! isset($this->conversionMap[get_class($domainEvent)])) {
+            if (! isset($this->conversionMap[$domainEvent::class])) {
                 continue;
             }
 
-            $converter = $this->conversionMap[get_class($domainEvent)];
+            $converter = $this->conversionMap[$domainEvent::class];
 
             $outboxEntries[] = $converter->convert($domainEvent);
         }
