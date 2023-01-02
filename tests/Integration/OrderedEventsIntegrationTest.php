@@ -25,8 +25,7 @@ final class OrderedEventsIntegrationTest extends TestCase
 
     private OrderedDoctrineEventsRecorder $recorder;
 
-    /** @var EventDispatcherInterface|MockObject */
-    private $eventDispatcher;
+    private EventDispatcherInterface|MockObject $eventDispatcher;
 
     private SimpleEventsDispatcher $doctrineDispatcher;
 
