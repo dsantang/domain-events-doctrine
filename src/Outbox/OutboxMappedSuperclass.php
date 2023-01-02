@@ -40,7 +40,7 @@ abstract class OutboxMappedSuperclass
     protected string $payloadType;
 
     /**
-     * @ORM\Column(type="json_array", options={"jsonb"=true})
+     * @ORM\Column(type="json", options={"jsonb"=true})
      *
      * @var mixed[]
      */

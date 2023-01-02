@@ -37,6 +37,7 @@
     },
     "require": {
         "php": "^8.2",
+        "doctrine/dbal": "^3.5",
         "doctrine/orm": "^2.8",
         "dsantang/domain-events": "^0.5",
         "ramsey/uuid": "^4.1",
