@@ -8,8 +8,3 @@ parameters:
         - src
         - tests
     reportUnmatchedIgnoredErrors: false
-    ignoreErrors:
-        -
-          message: '#Call to an undefined method PHPUnit.#'
-          paths:
-            - tests/Integration/OrderedEventsIntegrationTest.php

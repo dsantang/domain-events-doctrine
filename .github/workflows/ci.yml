@@ -12,7 +12,8 @@ jobs:
       fail-fast: false
       matrix:
         php-version:
-          - "8.2"
+          - "7.4"
+          - "8.0"
 
     steps:
       - uses: actions/checkout@v2
@@ -44,7 +45,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: 7.4
           tools: composer:v2
 
       - uses: ./.github/actions/composer-install
@@ -62,7 +63,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: 7.4
           tools: composer:v2
 
       - uses: ./.github/actions/composer-install
@@ -80,7 +81,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.2
+          php-version: 7.4
           tools: composer:v2
 
       - uses: ./.github/actions/composer-install
