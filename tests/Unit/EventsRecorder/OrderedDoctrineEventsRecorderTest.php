@@ -14,6 +14,7 @@ use Dsantang\DomainEvents\Registry\EventsRegistry;
 use Dsantang\DomainEventsDoctrine\Aggregator;
 use Dsantang\DomainEventsDoctrine\EventsRecorder\OrderedDoctrineEventsRecorder;
 use Dsantang\DomainEventsDoctrine\Tests\RandomDomainEvent;
+use phpDocumentor\Reflection\Types\Object_;
 use PHPUnit\Framework\TestCase;
 
 final class OrderedDoctrineEventsRecorderTest extends TestCase
@@ -31,7 +32,7 @@ final class OrderedDoctrineEventsRecorderTest extends TestCase
 
         $unitOfWork->expects(self::once())
                    ->method('getScheduledEntityDeletions')
-                   ->willReturn([]);
+                   ->willReturn([new Object_()]);
 
         $unitOfWork->expects(self::once())
                    ->method('getScheduledEntityInsertions')
@@ -80,11 +81,8 @@ final class OrderedDoctrineEventsRecorderTest extends TestCase
             }
         };
 
-        $object = new class (){
-        };
-
         return [
-            'with no changed entities' => [$object, []],
+            'with no changed entities' => [new Object_(), []],
             'with a changed entity' => [$awareEntity, [new RandomDomainEvent(), new RandomDomainEvent()]],
         ];
     }

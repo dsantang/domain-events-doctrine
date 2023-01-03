@@ -14,16 +14,10 @@ use Dsantang\DomainEventsDoctrine\Outbox\OutboxMappedSuperclass;
 class OutboxSubClass extends OutboxMappedSuperclass
 {
     /** @ORM\Column(type="string", name="field_1", nullable=true) */
-    private readonly string $field1;
+    private string $field1;
 
     /** @ORM\Column(type="string", name="field_2", nullable=true) */
-    private readonly string $field2;
-
-    public function __construct()
-    {
-        $this->field1 = '';
-        $this->field2 = '';
-    }
+    private string $field2;
 
     public function getField1(): string
     {
